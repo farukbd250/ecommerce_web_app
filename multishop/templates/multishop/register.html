@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>MultiShop | Register</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+   {% include "multishop/css.html" %}
+  
+</head>
+ 
+    <body>
+        <!-- Topbar Start -->
+        {% include "multishop/navbar.html"%}
+        <div class="col-lg-4 center" style="text-align: center; margin: 0 auto;">
+            <h2 style="text-align: center;"><i class="fas fa-user-plus"></i> Register</h2>
+            <form style="display: inline-block; text-align: left;" method="post">
+                {% csrf_token %}
+                <div class="form-group input-icon" style="margin-bottom: 10px;">
+                    <i class="fas fa-user form-icon" style="position: absolute; margin-top: 10px; margin-left: 5px;"></i>
+                    <input type="text" name="username" placeholder="User Name" required style="padding-left: 25px; width: 100%;">
+                </div>
+                
+                <div class="form-group input-icon" style="margin-bottom: 10px;">
+                    <i class="fas fa-envelope form-icon" style="position: absolute; margin-top: 10px; margin-left: 5px;"></i>
+                    <input type="email" name="email" placeholder="Email" required style="padding-left: 25px; width: 100%;">
+                </div>
+                <div class="form-group input-icon" style="margin-bottom: 10px;">
+                    <i class="fas fa-lock form-icon" style="position: absolute; margin-top: 10px; margin-left: 5px;"></i>
+                    <input type="password" name="password" placeholder="Password" required style="padding-left: 25px; width: 100%;">
+                </div>
+                <div class="form-group input-icon" style="margin-bottom: 10px;">
+                    <i class="fas fa-lock form-icon" style="position: absolute; margin-top: 10px; margin-left: 5px;"></i>
+                    <input type="password" name="confirm_password" placeholder="Confirm Password" required style="padding-left: 25px; width: 100%;">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;"><i class="fas fa-user-plus"></i> Register</button>
+                <div class="form-group" style="text-align: center; margin-top: 15px;">
+                    <a href="#">Already have an account? Login</a>
+                </div>
+            </form>
+        </div>
+        
+       
+
+
+
+
+
+
+
+   
+        {% include "multishop/footer.html" %}
+            
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="{% static 'multishop/lib/easing/easing.min.js'%}" ></script>
+        <script src="{% static 'multishop/lib/owlcarousel/owl.carousel.min.js'%}"></script>
+
+        <!-- Contact Javascript File -->
+        <script src="{% static 'multishop/mail/jqBootstrapValidation.min.js'%}"></script>
+        <script src="{% static 'multishop/mail/contact.js'%}"></script>
+
+        <!-- Template Javascript -->
+        <script src="{% static 'multishop/js/main.js' %}"></script>
+    </body>
+</html>

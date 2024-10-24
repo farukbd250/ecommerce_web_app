@@ -1,0 +1,172 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>MultiShop | Cart</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+   {% include "multishop/css.html" %}
+</head>
+<styl>
+    
+</style>
+<body>
+    <!-- Topbar Start -->
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    
+    {% include "multishop/navbar.html"%}
+    <!-- Navbar End -->
+
+
+    <!-- Breadcrumb Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-light mb-30">
+                    <a class="breadcrumb-item text-dark" href="#">Home</a>
+                    <a class="breadcrumb-item text-dark" href="#">Shop</a>
+                    <span class="breadcrumb-item active">Shopping Cart</span>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+
+    <!-- Cart Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            
+    <!-- Cart Vies start here -->
+            <div class="col-lg-8 table-responsive mb-5">
+                <table class="table table-light table-borderless table-hover text-center mb-0">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Products</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody class="align-middle">
+                        {% if cart_items %}
+                            {% for item in cart_items %}
+                                <tr>
+                                    <td class="align-middle text-left">
+                                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" style="width: 50px;">
+                                        {{ item.product.name }}
+                                    </td>
+                                    <td class="align-middle">৳{{ item.product.discount_price|default:item.product.price }}</td>
+                                    <td class="align-middle">
+                                        <div class="input-group quantity mx-auto" style="width: 100px;">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-sm btn-primary btn-minus" data-item-id="{{ item.id }}">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="{{ item.quantity }}">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-sm btn-primary btn-plus" data-item-id="{{ item.id }}">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle">৳{{ item.total_price }}</td> <!-- Use total_price here -->
+                                    <td class="align-middle">
+                                        <a href="{% url 'remove_from_cart' item.id %}">
+                                            <i class="fa fa-trash" aria-hidden="true" style="font-size:24px;color:red"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <td colspan="5" class="align-middle text-center">
+                                <strong>Your cart is empty</strong>
+                            </td>
+                        {% endif %}
+                    </tbody>
+                    
+                </table> 
+            </div>
+    <!-- Cart Vies end here -->
+            <div class="col-lg-4">
+                <form class="mb-30" action="">
+                    <div class="input-group">
+                        <input type="text" class="form-control border-0 p-4" placeholder="Coupon Code">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary">Apply Coupon</button>
+                        </div>
+                    </div>
+                </form>
+                <h5 class="section-title position-relative text-uppercase mb-3">
+                    <span class="bg-secondary pr-3">Cart Summary</span>
+                </h5>
+                <!-- Cart Summary Start-->
+                <div class="bg-light p-30 mb-5">
+                    <div class="border-bottom pb-2">
+                        <div class="d-flex justify-content-between mb-3">
+                            <h6>Subtotal</h6>
+                            <h6>৳{{ total }}</h6>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h6 class="font-weight-medium">Shipping</h6>
+                            <h6 class="font-weight-medium">৳ 40</h6>
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <div class="d-flex justify-content-between mt-2">
+                            <h5>Total</h5>
+                            <h5>৳{{ total_with_shipping }}</h5>
+                        </div>
+                        <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
+                    </div>
+                </div>
+              <!-- Cart Summary Start-->
+                
+            </div>
+        </div>
+    </div>
+    
+    
+    <!-- Cart End -->
+
+
+    <!-- Footer Start -->
+   
+{% include "multishop/footer.html" %}
+    
+
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'multishop/lib/easing/easing.min.js'%}" ></script>
+<script src="{% static 'multishop/lib/owlcarousel/owl.carousel.min.js'%}"></script>
+
+<!-- Contact Javascript File -->
+<script src="{% static 'multishop/mail/jqBootstrapValidation.min.js'%}"></script>
+<script src="{% static 'multishop/mail/contact.js'%}"></script>
+
+<!-- Template Javascript -->
+<script src="{% static 'multishop/js/main.js' %}"></script>
+<script src="{% static 'multishop/js/cart.js' %}"></script>
+</body>
+
+</html>

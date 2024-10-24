@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MultiShop | Brands</title>
+    {% include "multishop/css.html" %}
+</head>
+<style>
+    .product-item {
+        height: 400px; /* Set a fixed height for all products */
+        display: flex;
+        flex-direction: column; /* Allow vertical stacking */
+    }
+    .product-img {
+        flex-grow: 1; /* Let image section expand */
+    }
+  </style>
+<body>
+    {% include "multishop/navbar.html" %}
+    
+    
+   <!-- Vendor End -->
+   <div class="col-lg-9 col-md-8">
+    <div class="row pb-3">
+            {% for product in brands %}
+            <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                <div class="product-item bg-light mb-4">
+                    <div class="product-img position-relative overflow-hidden">
+                        <img class="img-fluid w-100 h-100" src="{{ product.image.url }}" alt="{{ product.name }}">
+                       
+                        <div class="product-action">
+                            <a class="btn btn-outline-dark btn-square" href="{% url "add_to_cart" product.id %}"><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                        </div>
+                    </div>
+                        {% if product.discount_percentage > 0 %}
+                        <h2 class="bg-danger text-white text-center" >
+                            Off: {{ product.discount_percentage }}%
+                        </h2>
+                        {% endif %}
+                    <div class="text-center py-4">
+                        <a class="h6 text-decoration-none text-truncate" href="{% url 'indetail' product.slug %}">{{ product.name }}</a>
+                        <div class="d-flex align-items-center justify-content-center mt-2">
+                            <h5>৳{{ product.discount_price|default:product.price }}</h5>
+                            {% if product.discount_percentage > 0 %}
+                            <h6 class="text-muted ml-2"><del>৳{{ product.price }}</del></h6>
+                            {% endif %}
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center mb-1">
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small>(99)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <div class="alert alert-warning text-center" role="alert">
+                    No products found in this category.
+                </div>
+            </div>
+            {% endfor %}
+        
+        
+        <div class="col-12">
+            <nav>
+              <ul class="pagination justify-content-center">
+                <li class="page-item disabled"><a class="page-link" href="#">Previous</span></a></li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+              </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+{% include "multishop/footer.html" %}
+    
+
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'multishop/lib/easing/easing.min.js'%}" ></script>
+<script src="{% static 'multishop/lib/owlcarousel/owl.carousel.min.js'%}"></script>
+
+<!-- Contact Javascript File -->
+<script src="{% static 'multishop/mail/jqBootstrapValidation.min.js'%}"></script>
+<script src="{% static 'multishop/mail/contact.js'%}"></script>
+
+<!-- Template Javascript -->
+<script src="{% static 'multishop/js/main.js' %}"></script>
+</body>
+
+</html>
